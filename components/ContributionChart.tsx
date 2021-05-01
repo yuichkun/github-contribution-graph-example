@@ -20,7 +20,7 @@ function formatter(timeSeries: Externals.Github.ContributionDay[]): FormattedSta
   }))
 }
 
-const CONTRIBUTION_COUNT_LINE_COLOR = "#c43a31"
+const CONTRIBUTION_COUNT_LINE_COLOR = "#a7def3"
 
 const VictoryZoomVoronoiContainer = createContainer("zoom", "voronoi") as any;
 
