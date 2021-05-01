@@ -1,5 +1,6 @@
 import { NextPage } from "next";
-import { ContributionChart } from '../components/ContributionChart'
+import { FC, SyntheticEvent, useRef } from "react";
+import { ContributionChart } from '../components/ContributionChart';
 import { retrieveContributionData } from "../modules/github";
 
 const MAIN_AUTHOR_USER_NAME = 'yuichkun'
@@ -11,13 +12,38 @@ type Props = {
 }
 
 
+const ChartArea: FC<Props> = ({ totalContributions, contributionDays, userName }) => (
+  <>
+    <h1>GitHub Contributions of <a target="_blank" rel="noopener" href={`https://github.com/${userName}`}>{userName}</a></h1>
+    <h2>Total Contributions: {totalContributions}</h2>
+    <h2>Accumulation of Contributions Over One Year</h2>
+    <ContributionChart contributionDays={contributionDays} />
+  </>
+)
+
+const SearchArea: FC<Pick<Props, 'userName'>> = ({userName}) => {
+  const ref = useRef<HTMLInputElement>(null)
+  function onClick(e: SyntheticEvent) {
+    e.preventDefault()
+    const newUserName = ref.current?.value || MAIN_AUTHOR_USER_NAME
+    window.document.location.href = `/?user_name=${newUserName}`
+  }
+  return (
+    <div>
+      Type in a GitHub Account ID Below to See Contributions
+      <form>
+        <input ref={ref} type="text" placeholder={userName}/>
+        <button type="submit" onClick={onClick}>Look</button>
+      </form>
+    </div>
+  )
+}
+
 const IndexPage: NextPage<Props> = ({ contributionDays, totalContributions, userName }) => {
   return (
     <div>
-      <h1>GitHub Contributions of <a target="_blank" rel="noopener" href={`https://github.com/${userName}`}>{userName}</a></h1>
-      <h2>Total Contributions: {totalContributions}</h2>
-      <h2>Accumulation of Contributions Over One Year</h2>
-      <ContributionChart contributionDays={contributionDays}/>
+      <ChartArea contributionDays={contributionDays} totalContributions={totalContributions} userName={userName} />
+      <SearchArea userName={userName}/>
     </div>
   )
 }
