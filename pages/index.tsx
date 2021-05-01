@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import { FC, SyntheticEvent, useRef } from "react";
 import { ContributionChart } from '../components/ContributionChart';
 import { retrieveContributionData } from "../modules/github";
+import Head from 'next/head'
 
 const MAIN_AUTHOR_USER_NAME = 'yuichkun'
 
@@ -31,7 +32,7 @@ const SearchArea: FC<Pick<Props, 'userName'>> = ({userName}) => {
   return (
     <div style={{marginTop: '120px'}}>
       Type in Another GitHub Account ID Below to See Contributions
-      <form>
+      <form style={{marginTop: '12px'}}>
         <input ref={ref} type="text" placeholder={userName}/>
         <button type="submit" onClick={onClick}>Look</button>
       </form>
@@ -41,10 +42,16 @@ const SearchArea: FC<Pick<Props, 'userName'>> = ({userName}) => {
 
 const IndexPage: NextPage<Props> = ({ contributionDays, totalContributions, userName }) => {
   return (
-    <div>
-      <ChartArea contributionDays={contributionDays} totalContributions={totalContributions} userName={userName} />
-      <SearchArea userName={userName}/>
-    </div>
+    <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet" />
+      </Head>
+      <div style={{ textAlign: 'center', fontFamily: 'roboto' }}>
+        <ChartArea contributionDays={contributionDays} totalContributions={totalContributions} userName={userName} />
+        <SearchArea userName={userName}/>
+      </div>
+    </>
   )
 }
 
