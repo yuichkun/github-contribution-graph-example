@@ -3,6 +3,7 @@ import { FC, SyntheticEvent, useRef } from "react";
 import { ContributionChart } from '../components/ContributionChart';
 import { retrieveContributionData } from "../modules/github";
 import Head from 'next/head'
+import { repository, author } from '../package.json'
 
 const MAIN_AUTHOR_USER_NAME = 'yuichkun'
 
@@ -40,6 +41,20 @@ const SearchArea: FC<Pick<Props, 'userName'>> = ({userName}) => {
   )
 }
 
+const AuthorArea: FC = () => {
+  const httpUrl = repository.url.replace('git+', '')
+  return (
+    <div style={{ marginTop: '120px'}}>
+      <p>
+        Source Code Here: <a rel="noopener" target="_blank" href={httpUrl}>{httpUrl}</a>
+      </p>
+      <p>
+        Author: <a rel="noopener" target="_blank" href={`https://github.com/${MAIN_AUTHOR_USER_NAME}`}>{author}</a>
+      </p>
+    </div>
+  )
+}
+
 const IndexPage: NextPage<Props> = ({ contributionDays, totalContributions, userName }) => {
   return (
     <>
@@ -50,6 +65,7 @@ const IndexPage: NextPage<Props> = ({ contributionDays, totalContributions, user
       <div style={{ textAlign: 'center', fontFamily: 'roboto' }}>
         <ChartArea contributionDays={contributionDays} totalContributions={totalContributions} userName={userName} />
         <SearchArea userName={userName}/>
+        <AuthorArea />
       </div>
     </>
   )
