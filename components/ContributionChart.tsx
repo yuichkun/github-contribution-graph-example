@@ -61,7 +61,6 @@ export const ContributionChart: FC<Props> = ({ contributionDays }) => {
         </VictoryGroup>
       </VictoryChart>
       <VictoryChart
-        width={550}
         height={90}
         scale={{ x: "time" }}
         padding={{ top: 0, left: 50, right: 50, bottom: 30 }}
