@@ -4,7 +4,25 @@
   "description": "An example project of retrieving contribution graph from GitHub via API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "type-check": "tsc"
+  },
+  "dependencies": {
+    "next": "10.2.0",
+    "node-fetch": "2.6.1",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "victory": "35.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.21",
+    "@types/node-fetch": "2.5.10",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "@types/victory": "33.1.4",
+    "typescript": "4.0"
   },
   "repository": {
     "type": "git",
