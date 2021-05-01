@@ -29,8 +29,8 @@ const SearchArea: FC<Pick<Props, 'userName'>> = ({userName}) => {
     window.document.location.href = `/?user_name=${newUserName}`
   }
   return (
-    <div>
-      Type in a GitHub Account ID Below to See Contributions
+    <div style={{marginTop: '120px'}}>
+      Type in Another GitHub Account ID Below to See Contributions
       <form>
         <input ref={ref} type="text" placeholder={userName}/>
         <button type="submit" onClick={onClick}>Look</button>
