@@ -2,6 +2,7 @@ import { parseISO } from "date-fns";
 import format from "date-fns/format";
 import React, { FC } from "react";
 import { createContainer, VictoryAxis, VictoryBrushContainer, VictoryChart, VictoryGroup, VictoryLine, VictoryTheme, VictoryTooltip } from "victory";
+import { useWindowSize } from "./hooks/useWindowResize";
 import { useZoom } from "./hooks/useZoom";
 
 type Props = {
@@ -28,13 +29,11 @@ const labelPresenter = ({datum}: {datum: Externals.Github.ContributionDay}) => `
 export const ContributionChart: FC<Props> = ({ contributionDays }) => {
   const { zoomDomain, selectedZoomDomain, setSelectedZoomDomain, setZoomDomain } = useZoom()
   const formattedTimeSeries = formatter(contributionDays);
+  const size = useWindowSize()
   return (
-    <div
-      style={{
-        width: "800px",
-      }}
-    >
+    <div>
       <VictoryChart
+        width={size.width}
         theme={VictoryTheme.grayscale}
         scale={{ x: "time" }}
         containerComponent={
@@ -61,6 +60,7 @@ export const ContributionChart: FC<Props> = ({ contributionDays }) => {
         </VictoryGroup>
       </VictoryChart>
       <VictoryChart
+        width={size.width}
         height={90}
         scale={{ x: "time" }}
         padding={{ top: 0, left: 50, right: 50, bottom: 30 }}
