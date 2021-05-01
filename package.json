@@ -10,6 +10,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "date-fns": "2.21.1",
     "next": "10.2.0",
     "node-fetch": "2.6.1",
     "react": "17.0.1",
